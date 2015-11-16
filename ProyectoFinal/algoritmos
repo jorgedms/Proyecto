@@ -1,0 +1,22 @@
+base = 330r
+base + bote = 450 r
+296 ml = 750r
+150 ml = 680r
+
+296 ml = 300
+
+
+************ALGORITMOS*************	
+
+conversion masa corporal -> L de agua
+
+peso -> p (ingresado por el usuario)
+Litros --> [(p/2)]*(28.35/1000)
+
+
+/algoritmo para calculo de agua consumida 
+agua bebida -> ab (medicion actual del arduino)
+T -> pachones bebidos*0.3
+cantTotalBebida --> T +(0.3300-ab) 
+if ab<30 -> pachones bebidos + 1
+
