@@ -21,11 +21,11 @@ void draw()
   background(img);
   
   textSize(32); 
-  fill(#000000);
+  fill(#FFFFFF);
   text("Pachón Inteligente", 50, 60);
-  text("Peso corporal:", 10, 142);
-  text("Agua Consumida:", 10, 224);
-  text("Agua por tomar:", 10, 306);
+  text("Peso corporal: \n---", 10, 142);
+  text("Agua Consumida: \n---", 10, 224);
+  text("Agua por tomar: \n---", 10, 306);
   
   
   /*
