@@ -9,6 +9,8 @@ Integrates:
   Jose Ochoa, 
   
 */
+//importaciones
+import processing.serial.*;
 
 //variables
 PImage fondo;
@@ -17,8 +19,12 @@ PImage boton1, boton2;
 PFont font;
 String[] data;
 int lenght;
-int peso;
 String input = "";
+int peso;
+int nuevo;
+
+Pila<Integer> pila;
+Serial myPort;
 
 //setup
 void setup(){
@@ -33,16 +39,32 @@ void setup(){
   textFont(font);
   boton = boton1;
   
+  //se crea el objeto para la pila
+  pila = new SimpleEncadenada<Integer>();
   getData();
+  
+  //puerto
+  /*El puerto puede ser 0, 1, 2, 3
+  * se debe cambiar el 0 por el puerto definido para arduino
+  */
+  //String portName = Serial.list()[0];
+  //myPort = new Serial(this, portName, 9600);
 }
 
 //ciclo infinito
 void draw(){
+  
+  //si hay dato en puerto se agrega en variable nuevo.
+  /*
+  if (myPort.available() > 0){
+    nuevo = myPort.read();
+  }
+  */
   image(fondo, 0, 0, (4*fondo.width)/6, (4*fondo.height)/6);
-  fill(0);
+  fill(255,255,255);
   //peso de persona
   text("Peso", 55,90);
-  text(peso+" lbs", 70, 110);
+  text(peso+" libras", 70, 110);
   //agua bebida
   text("Cantidad de agua bebida", 55, 150);
   text("bebida", 70, 170);
@@ -75,12 +97,27 @@ void getData(){
   /*permite agregar datos indefinidamente en el archivo siempre que 
   este sobre la linea fin*/
   //direccion del archivo a usar
-  data = loadStrings("datos a guardar.txt");
+  data = loadStrings("litros.txt");
+  
+  //se obtienen los datos del archivo
+  //es automatico, no se deberia modificar nada
   for (int i=0; !data[i].equals("fin");i++){
     lenght = i;
-    //println(data[i]);
+    println(data[i]);
   }
+  //se imprime la cantidad de datos
   println ("datos: " + (lenght+1));
+  
+  //paso a pila
+  //es automatico, no se deberia modificar nada
+  for (int i=lenght; i>0; i--){
+    //println("en for");
+    pila.push(int (data[i]));
+    println(data[i]);
+  }
+  
+  //verificacion
+  //println("pila top: " + pila.peek());
 }
 
 void keyPressed(){
