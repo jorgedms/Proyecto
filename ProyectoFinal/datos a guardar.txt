@@ -3,3 +3,7 @@ peso del pachon (40 onz)
 agua (100 ml)
 promedio
 fin
+
+*la linea fin es necesaria para el programa
+*se puede agregar cuanta información antes de esa linea
+*porque al leer se recorre y guarda hasta encontrar el "fin"
