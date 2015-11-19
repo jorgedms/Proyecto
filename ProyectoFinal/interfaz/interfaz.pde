@@ -5,7 +5,7 @@ Algoritmos y estrucutra de datos
 Integrates:
   Christopher Aju, 13171
   Jorge Manrique, 13600
-  Jasmin Valdez, 
+  Yasmin Valdez, 
   Jose Ochoa, 
   
 */
@@ -20,8 +20,12 @@ PFont font;
 String[] data;
 int lenght;
 String input = "";
-int peso;
+float peso;
 int nuevo;
+int pachones ;
+int bebido;
+int h;
+
 
 Pila<Integer> pila;
 Serial myPort;
@@ -33,6 +37,7 @@ void setup(){
   fondo = loadImage("cell.jpg");
   boton1 = loadImage("boton1.png");
   boton2 = loadImage("boton2.png");
+  peso = 150;
   //font
   printArray(PFont.list());
   font = createFont("Verdana Bold", 15);
@@ -47,19 +52,21 @@ void setup(){
   /*El puerto puede ser 0, 1, 2, 3
   * se debe cambiar el 0 por el puerto definido para arduino
   */
-  //String portName = Serial.list()[0];
-  //myPort = new Serial(this, portName, 9600);
+  
+   // List all the available serial ports
+  printArray(Serial.list());
+  // Open the port you are using at the rate you want:
+  myPort = new Serial(this, Serial.list()[0], 9600);
 }
 
 //ciclo infinito
 void draw(){
   
-  //si hay dato en puerto se agrega en variable nuevo.
-  /*
-  if (myPort.available() > 0){
-    nuevo = myPort.read();
+  //si hay dato en puerto se agrega en variable nuevo
+   while (myPort.available() > 0) {
+    h = myPort.read();
   }
-  */
+  
   image(fondo, 0, 0, (4*fondo.width)/6, (4*fondo.height)/6);
   fill(255,255,255);
   //peso de persona
@@ -67,13 +74,13 @@ void draw(){
   text(peso+" libras", 70, 110);
   //agua bebida
   text("Cantidad de agua bebida", 55, 150);
-  text("bebida", 70, 170);
+  text(bebido, 70, 170);
   //cantidad de agua necesaria
   text("Cantidad necesaria", 50,220);
-  text(prueba(), 70, 240);
-  //Mostrar promedio
+  text(litros(), 70, 240);
+  /*//Mostrar promedio
   text("Promedio",125, 400);
-  image(boton, 135, 430, (1*boton.width)/40, (1*boton.height)/40);
+  image(boton, 135, 430, (1*boton.width)/40, (1*boton.height)/40);*/
   
   //comportamiento boton
   if (mousePressed==true){
@@ -152,8 +159,8 @@ void keyPressed(){
   }
 }
 
-int prueba(){
-  int val;
-  val = peso -10;
+float litros(){
+  float val;
+  val = (peso/2)*0.02956;
   return val;
 }
